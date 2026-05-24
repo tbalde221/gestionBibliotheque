@@ -87,4 +87,10 @@ public class Etudiant {
         return true;
     }
 
+    @Override
+    public String toString() {
+        return "Etudiant [idEtudiant=" + idEtudiant + ", nom=" + nom + ", prenom=" + prenom + ", email=" + email
+                + ", niveau=" + niveau + "]";
+    }
+
 }

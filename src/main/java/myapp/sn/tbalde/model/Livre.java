@@ -1,5 +1,7 @@
 package sn.tbalde.model;
 
+import sn.tbalde.util.StringUtils;
+
 public class Livre {
     private int idLivre;
     private String titre;
@@ -8,14 +10,15 @@ public class Livre {
     private int quantiteDisponible;
 
     public Livre(int idLivre, String titre, String auteur, String categorie, int quantiteDisponible) {
+        this(titre, auteur, categorie, quantiteDisponible);
         this.idLivre = idLivre;
-        this.titre = titre;
-        this.auteur = auteur;
-        this.categorie = categorie;
-        this.quantiteDisponible = quantiteDisponible;
+
     }
 
     public Livre(String titre, String auteur, String categorie, int quantiteDisponible) {
+        StringUtils.validateString(titre);
+        StringUtils.validateString(auteur);
+        StringUtils.validateString(categorie);
         this.titre = titre;
         this.auteur = auteur;
         this.categorie = categorie;
@@ -31,6 +34,7 @@ public class Livre {
     }
 
     public void setTitre(String titre) {
+        StringUtils.validateString(titre);
         this.titre = titre;
     }
 
@@ -39,6 +43,7 @@ public class Livre {
     }
 
     public void setAuteur(String auteur) {
+        StringUtils.validateString(auteur);
         this.auteur = auteur;
     }
 
@@ -47,6 +52,7 @@ public class Livre {
     }
 
     public void setCategorie(String categorie) {
+        StringUtils.validateString(categorie);
         this.categorie = categorie;
     }
 
@@ -78,6 +84,12 @@ public class Livre {
         if (idLivre != other.idLivre)
             return false;
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Livre [idLivre=" + idLivre + ", titre=" + titre + ", auteur=" + auteur + ", categorie=" + categorie
+                + ", quantiteDisponible=" + quantiteDisponible + "]";
     }
 
 }

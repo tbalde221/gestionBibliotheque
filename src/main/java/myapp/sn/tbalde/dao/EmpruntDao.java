@@ -83,7 +83,7 @@ public class EmpruntDao implements Crud<Emprunt> {
                 SET
                     date_emprunt=?,
                     date_retour_prevue=?,
-                    date_retour_effective=?
+                    date_retour_effective=?,
                     statut=?,
                     id_livre=?,
                     id_etudiant=?
@@ -97,6 +97,7 @@ public class EmpruntDao implements Crud<Emprunt> {
             ps.setString(4, element.getStatut());
             ps.setInt(5, element.getIdLivre());
             ps.setInt(6, element.getIdEtudiant());
+            ps.setInt(7, element.getIdEmprunt());
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

@@ -22,17 +22,16 @@ public class EmpruntDao implements Crud<Emprunt> {
     public void create(Emprunt element) {
         String sql = """
                 INSERT INTO emprunt
-                (date_emprunt, date_retour_prevue, date_retour_effective, statut, id_livre, id_etudiant)
+                (date_emprunt, date_retour_prevue, statut, id_livre, id_etudiant)
                 VALUES
-                (?, ?, ?, ?, ?, ?)
+                (?, ?, ?, ?, ?)
                 """;
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setDate(1, element.getDateEmprunt());
             ps.setDate(2, element.getDateRetourPrevu());
-            ps.setDate(3, element.getDateRetourEffective());
-            ps.setString(4, element.getStatut());
-            ps.setInt(5, element.getIdLivre());
-            ps.setInt(6, element.getIdEtudiant());
+            ps.setString(3, element.getStatut());
+            ps.setInt(4, element.getIdLivre());
+            ps.setInt(5, element.getIdEtudiant());
             ps.executeUpdate();
 
         } catch (SQLException e) {
@@ -130,6 +129,25 @@ public class EmpruntDao implements Crud<Emprunt> {
         int idLivre = rs.getInt("id_livre");
         int idEtudiant = rs.getInt("id_etudiant");
         return new Emprunt(idEmprunt, dateEmprunt, dateRetourPrevue, dateRetourEffective, statut, idLivre, idEtudiant);
+    }
+
+    public Emprunt findByIdLivreIdEtudiant(int idLivre, int idEtudiant) {
+        String sql = """
+                SELECT * FROM emprunt
+                WHERE id_livre=? AND id_etudiant=?
+                """;
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setInt(1, idLivre);
+            ps.setInt(2, idEtudiant);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return mapper(rs);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
 }

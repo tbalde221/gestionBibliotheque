@@ -11,11 +11,21 @@ public class Emprunt {
     private int idLivre;
     private int idEtudiant;
 
-    public Emprunt(Date dateEmprunt, Date dateRetourPrevu, Date dateRetourEffective, String statut, int idLivre,
+    private Emprunt(Date dateEmprunt, Date dateRetourPrevu, Date dateRetourEffective, String statut, int idLivre,
             int idEtudiant) {
         this.dateEmprunt = dateEmprunt;
         this.dateRetourPrevu = dateRetourPrevu;
         this.dateRetourEffective = dateRetourEffective;
+        this.statut = statut;
+        this.idLivre = idLivre;
+        this.idEtudiant = idEtudiant;
+    }
+
+    public Emprunt(Date dateEmprunt, Date dateRetourPrevu, String statut, int idLivre,
+            int idEtudiant) {
+        this.dateEmprunt = dateEmprunt;
+        this.dateRetourPrevu = dateRetourPrevu;
+        this.dateRetourEffective = null;
         this.statut = statut;
         this.idLivre = idLivre;
         this.idEtudiant = idEtudiant;
